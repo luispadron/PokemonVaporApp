@@ -20,6 +20,24 @@
         }
       },
       {
+        "package": "CMySQL",
+        "repositoryURL": "https://github.com/vapor/cmysql.git",
+        "state": {
+          "branch": null,
+          "revision": "d931ed6ce52e772cd364fc0da59312440d6eee43",
+          "version": "2.0.2"
+        }
+      },
+      {
+        "package": "CPostgreSQL",
+        "repositoryURL": "https://github.com/vapor-community/cpostgresql.git",
+        "state": {
+          "branch": null,
+          "revision": "33f0f94f023ab61ccd0ba2f076dd6a448be853e3",
+          "version": "2.1.0"
+        }
+      },
+      {
         "package": "CTLS",
         "repositoryURL": "https://github.com/vapor/ctls.git",
         "state": {
@@ -110,12 +128,66 @@
         }
       },
       {
+        "package": "MySQL",
+        "repositoryURL": "https://github.com/vapor/mysql.git",
+        "state": {
+          "branch": null,
+          "revision": "45d6c07a1715a2a1f52e27be918b860dfda5a198",
+          "version": "2.0.2"
+        }
+      },
+      {
+        "package": "MySQLDriver",
+        "repositoryURL": "https://github.com/vapor/mysql-driver.git",
+        "state": {
+          "branch": null,
+          "revision": "bf16cc056a57a1d8c4fb25add22666112c1206e4",
+          "version": "2.0.2"
+        }
+      },
+      {
+        "package": "MySQLProvider",
+        "repositoryURL": "https://github.com/vapor/mysql-provider.git",
+        "state": {
+          "branch": null,
+          "revision": "b32b3ccce7cbe6f76a63dd9cab493ed458a31222",
+          "version": "2.0.0"
+        }
+      },
+      {
         "package": "Node",
         "repositoryURL": "https://github.com/vapor/node.git",
         "state": {
           "branch": null,
           "revision": "642f357d08ec5aa335ae2e3c4633c72da7b5a0c4",
           "version": "2.1.1"
+        }
+      },
+      {
+        "package": "PostgreSQL",
+        "repositoryURL": "https://github.com/vapor-community/postgresql.git",
+        "state": {
+          "branch": null,
+          "revision": "cfbfa12c148fd2b44e6777d4ed2f57ca597e06e7",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "PostgreSQLDriver",
+        "repositoryURL": "https://github.com/vapor-community/postgresql-driver.git",
+        "state": {
+          "branch": null,
+          "revision": "a8a410d4291094b0adc4ebb49adbc9d9310567ef",
+          "version": "2.1.0"
+        }
+      },
+      {
+        "package": "PostgreSQLProvider",
+        "repositoryURL": "https://github.com/vapor-community/postgresql-provider.git",
+        "state": {
+          "branch": null,
+          "revision": "28eda35d9887172d3f3e5769db603339d3e88f05",
+          "version": "2.1.0"
         }
       },
       {

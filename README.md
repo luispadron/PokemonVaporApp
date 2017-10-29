@@ -3,7 +3,8 @@
 Created for talk given @ University of Michigan.
 
 Checkout [Vapor](https://vapor.codes).
-Learn more [here](htts://vapor.university).
+
+Learn more [here](https://vapor.university).
 
 ## License
 

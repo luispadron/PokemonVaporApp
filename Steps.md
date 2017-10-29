@@ -60,3 +60,76 @@ extension Pokemon: Preparation {
 ```
 
 - Go into `Config+Setup.swift` and add `preparations.append(Pokemon.self)` into `setupPreparations`.
+
+
+## Step 2
+
+- Conform Pokemon.swift to JSONConvertible
+
+```swift
+// Allows Pokemon object to be converted from/to JSON.
+extension Pokemon: JSONConvertible {
+    // Create a pokemon object using pure JSON
+    convenience init (json: JSON) throws {
+        try self.init(name: json.get(Pokemon.Keys.name), date: Date())
+    }
+
+    func makeJSON() throws -> JSON {
+        var json = JSON()
+        try json.set(Pokemon.Keys.id, self.id)
+        try json.set(Pokemon.Keys.name, self.name)
+        try json.set(Pokemon.Keys.date, self.date)
+        return json
+    }
+}
+
+// Allows us to return our Pokemon object as a response object!
+extension Pokemon: ResponseRepresentable { }
+```
+
+- Create PokemonController.swift
+
+```swift
+import Vapor
+
+final class PokemonController: ResourceRepresentable {
+    // Called when going to "pokemons/"
+    func index(_ req: Request) throws -> ResponseRepresentable {
+        return try Pokemon.all().makeJSON()
+    }
+
+    func makeResource() -> Resource<Pokemon> {
+        return Resource(
+            index: index, 
+            store: nil, 
+            show: nil, 
+            update: nil, 
+            replace: nil,   
+            destroy: nil, 
+            clear: nil
+        )
+    }
+}
+
+// Just default conformance
+extension PokemonController: EmptyInitializable { }
+```
+
+- Create Routes.swift
+
+```swift
+import Vapor
+
+public extension Droplet {
+    func setupPokemonRoutes() throws {
+        try resource("pokemons", PokemonController.self)
+    }
+}
+```
+
+- Add routes setup to main.swift
+
+```swift
+try drop.setupPokemonRoutes()
+```
+

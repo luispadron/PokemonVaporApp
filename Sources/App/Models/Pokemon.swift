@@ -19,6 +19,7 @@ final class Pokemon: Model {
 
     // Keys for the database rows
     struct Keys {
+        static let id = "id"
         static let name = "name"
         static let date = "date"
     }
@@ -52,3 +53,22 @@ extension Pokemon: Preparation {
         try database.delete(self)
     }
 }
+
+// Allows Pokemon object to be converted from/to JSON.
+extension Pokemon: JSONConvertible {
+    // Create a pokemon object using pure JSON
+    convenience init (json: JSON) throws {
+        try self.init(name: json.get(Pokemon.Keys.name), date: Date())
+    }
+
+    func makeJSON() throws -> JSON {
+        var json = JSON()
+        try json.set(Pokemon.Keys.id, self.id)
+        try json.set(Pokemon.Keys.name, self.name)
+        try json.set(Pokemon.Keys.date, self.date)
+        return json
+    }
+}
+
+// Allows us to return our Pokemon object as a response object!
+extension Pokemon: ResponseRepresentable { }

@@ -1,23 +1,23 @@
 import Vapor
+import FluentProvider
 
-final class PokemonController: ResourceRepresentable {
-    // Called when going to "pokemons/"
-    func index(_ req: Request) throws -> ResponseRepresentable {
-        return try Pokemon.all().makeJSON()
+final class PokemonController {
+
+    // "Catches" a pokemon when posting to "pokemons/catch"
+    static func catchPokemon(_ req: Request) throws -> ResponseRepresentable {
+        guard let json = req.json else {
+            throw Abort.badRequest
+        }
+
+        // Create and save pokemon to database
+        let pokemon = try Pokemon(json: json)
+        try pokemon.save()
+
+        return pokemon
     }
 
-    func makeResource() -> Resource<Pokemon> {
-        return Resource(
-            index: index, 
-            store: nil, 
-            show: nil, 
-            update: nil, 
-            replace: nil,   
-            destroy: nil, 
-            clear: nil
-        )
+    static func addRoutes(to drop: Droplet) {
+        let pokemonGroup = drop.grouped("pokemons")
+        pokemonGroup.post("catch", handler: catchPokemon)
     }
 }
-
-// Just default conformance
-extension PokemonController: EmptyInitializable { }

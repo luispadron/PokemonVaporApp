@@ -134,3 +134,31 @@ public extension Droplet {
 try drop.setupPokemonRoutes()
 ```
 
+## Step 3
+
+- Add list function
+
+```swift
+// Lists all "caught" pokemon when accessing "/"
+static func listPokemon(_ req: Request) throws -> ResponseRepresentable {
+    return try Pokemon.all().makeJSON()
+}
+
+// In addRroutes
+pokemonGroup.post("catch", handler: catchPokemon)
+```
+
+Make sure to post a new pokemon then access.
+
+- Add get function
+
+```swift
+static func getPokemon(_ req: Request) throws -> ResponseRepresentable {
+    return try req.parameters.next(Pokemon.self)
+}
+
+// In addRoutes
+pokemonGroup.get(Pokemon.parameter, handler: getPokemon)
+```
+
+Re-run post again and do "localhost:8080/pokemon/[id]"

@@ -6,7 +6,7 @@
     "//": "The type of client to use for requesting data from other services.",
     "//": "engine: Vapor's blazing fast Engine HTTP client.",
     "//": "foundation: A wrapper around Foundation's URLSession.",
-    "client": "engine",
+    "client": "foundation",
 
     "//": "The type of console to use for displaying information and prompting input.",
     "//": "terminal: Vapor's default terminal console.",

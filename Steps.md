@@ -162,3 +162,35 @@ pokemonGroup.get(Pokemon.parameter, handler: getPokemon)
 ```
 
 Re-run post again and do "localhost:8080/pokemon/[id]"
+
+## Step 4
+
+- Modify PokemonController
+	- Remove static
+	- Add init
+
+```swift
+// "Catches" a pokemon when posting to "pokemons/catch"
+func catchPokemon(_ req: Request) throws -> ResponseRepresentable {
+    guard let json = req.json else { throw Abort.badRequest }
+
+    // Make an API Request to the PokeAPI and verify that the pokemon name is valid.
+    let pokeName: String = try json.get(Pokemon.Keys.name)
+
+    let response = try droplet.client.get(PokemonController.apiUrl + pokeName.lowercased())
+
+    // Make sure pokemon exists
+    guard response.data["id"]?.int != nil else {
+        throw Abort(.badRequest, reason: "\(pokeName.lowercased()) is not a valid Pokèmon!")
+    }
+
+    // Create and save pokemon to database
+    let pokemon = try Pokemon(json: json)
+    try pokemon.save()
+
+    return pokemon
+}
+```
+
+- Fix Routes.swift
+- Go to config/droplet.json and change client to "foundation"

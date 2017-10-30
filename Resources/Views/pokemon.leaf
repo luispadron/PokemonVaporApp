@@ -1,0 +1,9 @@
+#extend("base")
+
+#export("title") { #(name) }
+
+#export("content") {
+    <h1>#(name)</h1>
+    <img alt="#(name) Sprite" src="#(image)">
+    <p>Caught on: #(date)</p>
+}

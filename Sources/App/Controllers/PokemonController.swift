@@ -1,5 +1,6 @@
 import Vapor
 import FluentProvider
+import Foundation
 
 final class PokemonController {
     private static let apiUrl: String = "http://pokeapi.co/api/v2/pokemon/"
@@ -37,7 +38,24 @@ final class PokemonController {
     }
 
     func getPokemon(_ req: Request) throws -> ResponseRepresentable {
-        return try req.parameters.next(Pokemon.self)
+        let pokemon =  try req.parameters.next(Pokemon.self)
+        let response = try droplet.client.get(PokemonController.apiUrl + pokemon.name.lowercased())
+        // Get the pokemon sprite from API
+        guard let pokemonSprite = response.data["sprites", "front_default"]?.string else {
+            throw Abort(.badRequest, reason: "Unable to get sprite for pokemon \(pokemon.name)")
+        }
+
+        // Format the date
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        let dateString = formatter.string(from: pokemon.date)
+
+        // Make the HTML view.
+        return try droplet.view.make("pokemon", [
+            "name": pokemon.name,
+            "image": pokemonSprite,
+            "date": dateString
+        ])
     }
 
     func addRoutes() {

@@ -194,3 +194,69 @@ func catchPokemon(_ req: Request) throws -> ResponseRepresentable {
 
 - Fix Routes.swift
 - Go to config/droplet.json and change client to "foundation"
+
+## Step 5
+
+- Add LeafProvider
+	- Package.swift
+		`.package(url: "https://github.com/vapor/leaf-provider.git", .upToNextMajor(from: "1.1.0"))`
+	- Then add to dependencies
+- Add leaf in config for "view"
+
+	`"view": "leaf",`
+- Add `Resources/Views` folder
+- Add `base.leaf`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+	<title>#import("title")</title>
+	<link rel="stylesheet" href="/styles/app.css">
+</head>
+<body>
+
+#import("content")
+
+</body>
+</html>
+```
+
+- Add `pokemon.leaf`
+
+```html
+#extend("base")
+
+#export("title") { #(name) }
+
+#export("content") {
+    <h1>#(name)</h1>
+    <img alt="#(name) Sprite" src="#(image)">
+    <p>Caught on: #(date)</p>
+}
+```
+
+- Update `getPokemon` function
+
+```swift
+func getPokemon(_ req: Request) throws -> ResponseRepresentable {
+    let pokemon =  try req.parameters.next(Pokemon.self)
+    let response = try droplet.client.get(PokemonController.apiUrl + pokemon.name.lowercased())
+    // Get the pokemon sprite from API
+    guard let pokemonSprite = response.data["sprites", "front_default"]?.string else {
+        throw Abort(.badRequest, reason: "Unable to get sprite for pokemon \(pokemon.name)")
+    }
+
+    // Format the date
+    let formatter = DateFormatter()
+    formatter.dateStyle = .long
+    let dateString = formatter.string(from: pokemon.date)
+
+    // Make the HTML view.
+    return try droplet.view.make("pokemon", [
+        "name": pokemon.name,
+        "image": pokemonSprite,
+        "date": dateString
+    ])
+}
+```

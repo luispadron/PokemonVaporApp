@@ -28,6 +28,9 @@ eval "$(curl -sL https://apt.vapor.sh)"
 sudo apt-get install swift vapor
 ```
 
+### Clone starting point
+
+Clone the `master` branch from [here](https://github.com/luispadron/PokemonVaporApp)
 
 ## Step 1
 

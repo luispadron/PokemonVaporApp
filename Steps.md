@@ -1,3 +1,27 @@
+## Pre-steps
+
+### macOS
+
+- Make sure Xcode is installed, install from the App Store.
+- Install homebrew, [here](https://brew.sh)
+
+### Linux (Ubuntu)
+
+- Make sure Swift is installed, if not go [here](https://gist.github.com/Azoy/8c47629fa160878cf359bf7380aaaaf9) to learn how to install Swift.
+
+- Add Vapor's repo to APT
+
+```bash
+eval "$(curl -sL https://apt.vapor.sh)"
+```
+
+- Install Vapor
+
+```bash
+sudo apt-get install swift vapor
+```
+
+
 ## Step 1
 
 - Create Pokemon class.

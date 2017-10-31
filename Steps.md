@@ -4,6 +4,13 @@
 
 - Make sure Xcode is installed, install from the App Store.
 - Install homebrew, [here](https://brew.sh)
+- Install vapor
+
+```bash
+brew tap vapor/homebrew-tap
+brew update
+brew install vapor
+```
 
 ### Linux (Ubuntu)
 

@@ -21,6 +21,9 @@ eval "$(curl -sL https://apt.vapor.sh)"
 sudo apt-get install swift vapor
 ```
 
+## Step 0
+
+Clone the starter code [here](https://github.com/luispadron/PokemonVaporApp/)
 
 ## Step 1
 

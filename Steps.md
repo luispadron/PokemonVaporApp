@@ -4,6 +4,13 @@
 
 - Make sure Xcode is installed, install from the App Store.
 - Install homebrew, [here](https://brew.sh)
+- Install vapor
+
+```bash
+brew tap vapor/homebrew-tap
+brew update
+brew install vapor
+```
 
 ### Linux (Ubuntu)
 
@@ -23,7 +30,7 @@ sudo apt-get install swift vapor
 
 ## Step 0
 
-Clone the starter code [here](https://github.com/luispadron/PokemonVaporApp/)
+Clone the `master` branch from [here](https://github.com/luispadron/PokemonVaporApp)
 
 ## Step 1
 
